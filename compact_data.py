@@ -25,17 +25,18 @@ df = df \
     .withColumn('Streams', df['Streams'].cast(IntegerType())) \
     .filter(F.length(df['Country']) == 2) \
     .select('Country', 'Date', 'Position', 'Artist', 'TrackName', 'TrackID', 'Streams') \
-    .sort(df.Country, df.Date, df.Position) \
+    .sort(df.Country, df.Date, df.Position)
 
 # df.show()
-# %%
-# df \
-#     .coalesce(1) \
-#     .write \
-#     .mode('overwrite') \
-#     .option('header', 'true') \
-#     .csv('output.csv')
 
 # %%
-df_pd = df.toPandas()
-df_pd.to_csv('data_full.csv', header=True, index=False)
+df \
+    .coalesce(1) \
+    .write \
+    .mode('overwrite') \
+    .option('header', 'true') \
+    .csv('output.csv')
+
+# %%
+track_id = df.select('TrackID').distinct().toPandas()
+track_id.to_csv('track_ids.csv', header=True, index=False)
