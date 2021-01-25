@@ -86,13 +86,13 @@ for trackid in tqdm(trackids['TrackID']):
     if not exists(file_name):
         try:
             track_data = get_track_info(trackid)
+            with open(file_name, "w") as fp:
+                json.dump(track_data, fp)
+
         except Exception as e:
             print(e)
             time.sleep(10)
             sp = revoke_token()
-            track_data = get_track_info(trackid)
-
-        with open(file_name, "w") as fp:
-            json.dump(track_data, fp)
+            #track_data = get_track_info(trackid)
 
         # time.sleep(1)
