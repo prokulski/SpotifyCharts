@@ -47,29 +47,34 @@ def get_track_features(trackid):
         audio_features = sp.audio_features(trackid)
     except Exception as e:
         print(e)
-        return None
+        return {'item_id': trackid}
 
-    return {
-        'item_id': trackid,
-        'danceability': audio_features[0].get('danceability'),
-        'energy': audio_features[0].get('energy'),
-        'key': audio_features[0].get('key'),
-        'loudness': audio_features[0].get('loudness'),
-        'mode': audio_features[0].get('mode'),
-        'speechiness': audio_features[0].get('speechiness'),
-        'acousticness': audio_features[0].get('acousticness'),
-        'instrumentalness': audio_features[0].get('instrumentalness'),
-        'liveness': audio_features[0].get('liveness'),
-        'valence': audio_features[0].get('valence'),
-        'tempo': audio_features[0].get('tempo'),
-        'time_signature': audio_features[0].get('time_signature'),
-    }
-# %%
+    if audio_features:
+        return {
+            'item_id': trackid,
+            'danceability': audio_features[0].get('danceability'),
+            'energy': audio_features[0].get('energy'),
+            'key': audio_features[0].get('key'),
+            'loudness': audio_features[0].get('loudness'),
+            'mode': audio_features[0].get('mode'),
+            'speechiness': audio_features[0].get('speechiness'),
+            'acousticness': audio_features[0].get('acousticness'),
+            'instrumentalness': audio_features[0].get('instrumentalness'),
+            'liveness': audio_features[0].get('liveness'),
+            'valence': audio_features[0].get('valence'),
+            'tempo': audio_features[0].get('tempo'),
+            'time_signature': audio_features[0].get('time_signature'),
+        }
+
+    return {'item_id': trackid}
+
+    # %%
 
 
 def get_track_info(trackid):
     track_info = sp.track(trackid)
     audio_features = get_track_features(trackid)
+
     audio_features['album_name'] = track_info['album']['name']
     audio_features['album_release_date'] = track_info['album']['release_date']
     audio_features['album_release_year'] = int(
@@ -96,8 +101,5 @@ for trackid in tqdm(trackids['TrackID']):
 
         except Exception as e:
             print(e)
-            time.sleep(10)
+            time.sleep(5)
             sp = revoke_token()
-            #track_data = get_track_info(trackid)
-
-        # time.sleep(1)
