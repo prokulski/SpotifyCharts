@@ -1,0 +1,14 @@
+.vscode/**
+config.ini
+.cache-1166639346
+
+compact_data.py.log
+
+data/**
+data.zip
+chart_data.parquet/**
+
+track_data/**
+track_data.zip
+track_ids.csv
+track_audio_features.parquet/**

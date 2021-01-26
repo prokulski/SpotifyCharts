@@ -5,6 +5,7 @@ from spotipy import util
 import time
 import json
 from os.path import exists
+import configparser
 
 from tqdm import tqdm
 
@@ -13,10 +14,14 @@ import pandas as pd
 # %%
 
 # %%
-# Spotifya stuff
-SpotifyClientID = '37cf9edc5ce64f10a3481e51a49084ee'
-SpotifyClientSecret = '9d20c31a2842420fbfd3049d994fcac7'
-SpotifyUsername = '1166639346'
+# Spotify stuff
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+SpotifyClientID = config['SpotifyAPI']['SpotifyClientID']
+SpotifyClientSecret = config['SpotifyAPI']['SpotifyClientSecret']
+SpotifyUsername = config['SpotifyAPI']['SpotifyUsername']
+
 SpotifyScope = 'user-read-currently-playing,user-read-playback-state'
 
 # %%
