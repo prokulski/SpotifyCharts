@@ -46,7 +46,7 @@ logging.info("Data preprocessed!")
 logging.info("Writing PARQUET chart_data.parquet")
 
 chart_data \
-    .repartition(10) \
+    .repartition(50) \
     .write \
     .mode('overwrite') \
     .parquet('chart_data.parquet')
@@ -75,7 +75,7 @@ logging.info("Audio features loaded!")
 logging.info("Saving track_audio_features.parquet")
 
 audio_features \
-    .repartition(10) \
+    .repartition(50) \
     .write \
     .mode('overwrite') \
     .option('header', 'true') \
