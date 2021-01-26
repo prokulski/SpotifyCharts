@@ -10,12 +10,12 @@ import logging
 # %%
 logging.basicConfig(filename=f'{__file__}.log',
                     level=logging.INFO,
-                   format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # %%
 spark = SparkSession.builder \
     .master("local") \
-    .appName("Spotify Load") \
+    .appName("SpotifyCharts Compact Data") \
     .getOrCreate()
 
 # %%
@@ -41,7 +41,6 @@ chart_data = chart_data \
     .sort(chart_data.Country, chart_data.Date, chart_data.Position)
 
 logging.info("Data preprocessed!")
-# df.show()
 
 # %%
 logging.info("Writing PARQUET chart_data.parquet")
@@ -73,7 +72,6 @@ audio_features = spark \
 logging.info("Audio features loaded!")
 
 # %%
-
 logging.info("Saving track_audio_features.parquet")
 
 audio_features \
