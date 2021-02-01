@@ -109,7 +109,7 @@ def get_artist_info(artist_id):
 
 # %%
 sp = revoke_token()
-trackids = pd.read_csv('track_ids.csv')
+trackids = pd.read_csv(f'{DATA_DIR}/track_ids.csv')
 
 # %%
 for trackid in tqdm(trackids['TrackID']):
