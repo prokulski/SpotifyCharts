@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 # ściągnięcie notowań
 python3 download_charts.py
