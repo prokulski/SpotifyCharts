@@ -112,8 +112,8 @@ if __name__ == '__main__':
         .getOrCreate()
 
     if args.task == 'charts':
-        chart_data = compact_charts_data(spark)
-        generate_trackid_list(spark, chart_data)
+        cdata = compact_charts_data(spark)
+        generate_trackid_list(spark, cdata)
 
     if args.task == 'tracks':
         compact_track_data(spark)
