@@ -99,8 +99,8 @@ def compact_artist_data(spark):
         .write \
         .mode('overwrite') \
         .option('header', 'true') \
-        .parquet('artist.parquet')
-    logging.info(f"{PARQUET_DATA_DIR}artist.parquet saved")
+        .parquet(f'{PARQUET_DATA_DIR}/artist.parquet')
+    logging.info("artist.parquet saved")
 
 
 # %%
