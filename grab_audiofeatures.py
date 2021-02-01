@@ -12,7 +12,7 @@ from tqdm import tqdm
 import pandas as pd
 
 # %%
-DATA_DIR = 'data/'
+DATA_DIR = 'data'
 CHARTS_DATA_DIR = f'{DATA_DIR}/charts'
 TRACKS_DATA_DIR = f'{DATA_DIR}/tracks'
 ARTISTS_DATA_DIR = f'{DATA_DIR}/artists'
@@ -115,7 +115,7 @@ trackids = pd.read_csv('track_ids.csv')
 for trackid in tqdm(trackids['TrackID']):
 
     # ściągamy dane o tracku jeśli jeszcze ich nie mamy
-    file_name_track = f'track_data/{trackid}.json'
+    file_name_track = f'{TRACKS_DATA_DIR}/{trackid}.json'
     if not exists(file_name_track):
         try:
             track_data = get_track_info(trackid)
@@ -128,7 +128,7 @@ for trackid in tqdm(trackids['TrackID']):
             sp = revoke_token()
 
     # ściągamy dane o artyście - jeśli jeszcze ich nie mamy
-    file_name_artist = f"artist_data/{track_data['track_artist_id']}.json"
+    file_name_artist = f"{ARTISTS_DATA_DIR}/{track_data['track_artist_id']}.json"
     if not exists(file_name_artist):
         try:
             artist_data = get_artist_info(track_data['track_artist_id'])

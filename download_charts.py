@@ -6,7 +6,7 @@ import time
 from os.path import exists
 
 # %%
-DATA_DIR = 'data/'
+DATA_DIR = 'data'
 CHARTS_DATA_DIR = f'{DATA_DIR}/charts'
 TRACKS_DATA_DIR = f'{DATA_DIR}/tracks'
 ARTISTS_DATA_DIR = f'{DATA_DIR}/artists'
@@ -22,7 +22,8 @@ soup = BeautifulSoup(base_page.content, 'html.parser')
 # lista krajów
 country_list = soup.find('div', attrs={'data-type': 'country'})
 country_list = country_list.find_all('li')
-country_list = [el['data-value'] for el in country_list]
+country_list = [el['data-value']
+                for el in country_list if el['data-value'] != 'global']
 
 # %%
 

@@ -9,7 +9,7 @@ import logging
 import argparse
 
 # %%
-DATA_DIR = 'data/'
+DATA_DIR = 'data'
 CHARTS_DATA_DIR = f'{DATA_DIR}/charts'
 TRACKS_DATA_DIR = f'{DATA_DIR}/tracks'
 ARTISTS_DATA_DIR = f'{DATA_DIR}/artists'
@@ -37,13 +37,13 @@ def compact_charts_data(spark):
     logging.info("Loaded!")
 
     logging.info("Preprocessing data")
-    chart_data = chart_data \
-        .withColumnRenamed('Track Name', 'TrackName') \
-        .withColumn('Position', chart_data['Position'].cast(IntegerType())) \
-        .withColumn('Streams', chart_data['Streams'].cast(IntegerType())) \
-        .filter(F.length(chart_data['Country']) == 2) \
-        .select('Country', 'Date', 'Position', 'Artist', 'TrackName', 'TrackID', 'Streams') \
-        .sort(chart_data.Country, chart_data.Date, chart_data.Position)
+chart_data = chart_data \
+    .withColumnRenamed('Track Name', 'TrackName') \
+    .withColumn('Position', chart_data['Position'].cast(IntegerType())) \
+    .withColumn('Streams', chart_data['Streams'].cast(IntegerType())) \
+    .filter(F.length(chart_data['Country']) == 2) \
+    .select('Country', 'Date', 'Position', 'Artist', 'TrackName', 'TrackID', 'Streams') \
+    .sort(chart_data.Country, chart_data.Date, chart_data.Position)
     logging.info("Data preprocessed!")
 
     logging.info("Writing PARQUET chart.parquet")
