@@ -12,8 +12,6 @@ from tqdm import tqdm
 import pandas as pd
 
 # %%
-
-# %%
 # Spotify stuff
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -68,7 +66,8 @@ def get_track_features(trackid):
 
     return {'item_id': trackid}
 
-    # %%
+
+# %%
 
 
 def get_track_info(trackid):
@@ -81,8 +80,24 @@ def get_track_info(trackid):
         track_info['album']['release_date'][:4])
     audio_features['track_duration_ms'] = track_info['duration_ms']
     audio_features['track_explict'] = track_info['explicit']
+    audio_features['track_popularity'] = track_info['popularity']
+    audio_features['track_artist_id'] = track_info['artists'][0]['id']
 
     return audio_features
+
+
+# %%
+def get_artist_info(artist_id):
+    artist_data = sp.artist(artist_id)
+
+    artist_data_res = dict()
+    artist_data_res['id'] = artist_data['id']
+    artist_data_res['genre'] = artist_data['genres'][0] if artist_data['genres'] else []
+    artist_data_res['genres'] = artist_data['genres']
+    artist_data_res['popularity'] = int(artist_data['popularity'])
+    artist_data_res['followers'] = int(artist_data['followers']['total'])
+
+    return artist_data_res
 
 
 # %%
@@ -91,15 +106,29 @@ trackids = pd.read_csv('track_ids.csv')
 
 # %%
 for trackid in tqdm(trackids['TrackID']):
-    file_name = f'track_data/{trackid}.json'
 
-    if not exists(file_name):
+    # ściągamy dane o tracku jeśli jeszcze ich nie mamy
+    file_name_track = f'track_data/{trackid}.json'
+    if not exists(file_name_track):
         try:
             track_data = get_track_info(trackid)
-            with open(file_name, "w") as fp:
+            with open(file_name_track, "w") as fp:
                 json.dump(track_data, fp)
 
         except Exception as e:
             print(e)
-            time.sleep(5)
+            time.sleep(2)
+            sp = revoke_token()
+
+    # ściągamy dane o artyście - jeśli jeszcze ich nie mamy
+    file_name_artist = f"artist_data/{track_data['track_artist_id']}.json"
+    if not exists(file_name_artist):
+        try:
+            artist_data = get_artist_info(track_data['track_artist_id'])
+            with open(file_name_artist, "w") as fp:
+                json.dump(artist_data, fp)
+
+        except Exception as e:
+            print(e)
+            time.sleep(2)
             sp = revoke_token()
