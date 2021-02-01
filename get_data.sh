@@ -1,11 +1,13 @@
+# !/bin/bash
+
 # ściągnięcie notowań
-python download_charts.py
+python3 download_charts.py
 
 # skompaktowanie notowań i przygotowanie listy TrackIDs
-python compact_data.py charts
+python3 compact_data.py charts
 
 # pobranie cech audio i danych o artystach z TrackIDs
-python grab_audiofeatures.py
+python3 grab_audiofeatures.py
 
 # skompaktowanie tracków i artystów
-python compact_data.py tracks
+python3 compact_data.py tracks
