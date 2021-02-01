@@ -99,6 +99,7 @@ def get_artist_info(artist_id):
 
     artist_data_res = dict()
     artist_data_res['id'] = artist_data['id']
+    artist_data_res['name'] = artist_data['name']
     artist_data_res['genre'] = artist_data['genres'][0] if artist_data['genres'] else []
     artist_data_res['genres'] = artist_data['genres']
     artist_data_res['popularity'] = int(artist_data['popularity'])
@@ -124,7 +125,7 @@ for trackid in tqdm(trackids['TrackID']):
 
         except Exception as e:
             print(e)
-            time.sleep(2)
+            time.sleep(10)
             sp = revoke_token()
 
     # ściągamy dane o artyście - jeśli jeszcze ich nie mamy
@@ -137,5 +138,5 @@ for trackid in tqdm(trackids['TrackID']):
 
         except Exception as e:
             print(e)
-            time.sleep(2)
+            time.sleep(10)
             sp = revoke_token()
