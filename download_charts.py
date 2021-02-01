@@ -6,6 +6,13 @@ import time
 from os.path import exists
 
 # %%
+DATA_DIR = 'data/'
+CHARTS_DATA_DIR = f'{DATA_DIR}/charts'
+TRACKS_DATA_DIR = f'{DATA_DIR}/tracks'
+ARTISTS_DATA_DIR = f'{DATA_DIR}/artists'
+PARQUET_DATA_DIR = f'{DATA_DIR}/parquets'
+
+# %%
 base_url = 'https://spotifycharts.com/regional/global/weekly'
 
 base_page = requests.get(base_url)
@@ -43,7 +50,7 @@ for n, c in enumerate(country_list):
 
     for d in date_list:
         # budujemy nazwę pliku docelowego
-        file_name = f'data/{c}_{d}.csv'
+        file_name = f'{CHARTS_DATA_DIR}/{c}_{d}.csv'
 
         # jeśli plik jeszcze nie istnieje to go ściągamy
         if not exists(file_name):

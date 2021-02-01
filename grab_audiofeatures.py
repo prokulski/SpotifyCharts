@@ -12,6 +12,13 @@ from tqdm import tqdm
 import pandas as pd
 
 # %%
+DATA_DIR = 'data/'
+CHARTS_DATA_DIR = f'{DATA_DIR}/charts'
+TRACKS_DATA_DIR = f'{DATA_DIR}/tracks'
+ARTISTS_DATA_DIR = f'{DATA_DIR}/artists'
+PARQUET_DATA_DIR = f'{DATA_DIR}/parquets'
+
+# %%
 # Spotify stuff
 config = configparser.ConfigParser()
 config.read('config.ini')
