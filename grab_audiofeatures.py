@@ -123,20 +123,14 @@ for trackid in tqdm(trackids['TrackID']):
             with open(file_name_track, "w") as fp:
                 json.dump(track_data, fp)
 
-        except Exception as e:
-            print(e)
-            time.sleep(10)
-            sp = revoke_token()
-
-    # ściągamy dane o artyście - jeśli jeszcze ich nie mamy
-    file_name_artist = f"{ARTISTS_DATA_DIR}/{track_data['track_artist_id']}.json"
-    if not exists(file_name_artist):
-        try:
-            artist_data = get_artist_info(track_data['track_artist_id'])
-            with open(file_name_artist, "w") as fp:
-                json.dump(artist_data, fp)
+            # ściągamy dane o artyście - jeśli jeszcze ich nie mamy
+            file_name_artist = f"{ARTISTS_DATA_DIR}/{track_data['track_artist_id']}.json"
+            if not exists(file_name_artist):
+                artist_data = get_artist_info(track_data['track_artist_id'])
+                with open(file_name_artist, "w") as fp:
+                    json.dump(artist_data, fp)
 
         except Exception as e:
-            print(e)
+            print(trackid, e)
             time.sleep(10)
             sp = revoke_token()
