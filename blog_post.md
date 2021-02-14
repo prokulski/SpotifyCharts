@@ -55,9 +55,11 @@ Dla przejrzystości tym razem wpis bez kodu źródłowego (treści jest tyle, ż
   * wg streamów total
     * top globalnie
     * top na kontynencie
+    * top w Polsce
   * wg ilości razy na top1
     * top globalnie
     * top na kontynencie
+    * top w Polsce
    
 * popularność gatunków (wg streamów)
   * najpopularniejsze gatunki (agregaty) - na totalu
@@ -65,6 +67,8 @@ Dla przejrzystości tym razem wpis bez kodu źródłowego (treści jest tyle, ż
   * to samo dla Polski
 
 * liczba streamów w zależności od pozycji
+
+* ile % streamów zgrania top1? ole top3?
 
 * rok wydania utworu a liczba streamów (czy słucha się nowych czy wszystkiego)
   * lata 2017-2021, każda linia osobno
@@ -113,8 +117,6 @@ Dla przejrzystości tym razem wpis bez kodu źródłowego (treści jest tyle, ż
 * w szczególności dla piosenek z pierwszego miejsca
  * czy to się różni US / UK vs PL?
  * pierwszy moment pojawienia się w top - jak długo czasu i na które miejsce?
-
-* ile % streamów zgrania top1? ole top3?
 
 * popularity pioseniki vs łączna liczba streamów
 
